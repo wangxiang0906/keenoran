@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.wgw.constant.Constants;
 import com.wgw.model.item.GetItemMultiStockRequest;
+import com.wgw.model.item.QueryItemPriceRequest;
 import com.wgw.model.item.UpdateItemMultiStockRequest;
 import com.wgw.model.item.UpdateItemStockRequest;
 import com.wgw.model.item.base.ItemStock;
@@ -16,6 +17,30 @@ import com.wgw.util.URLUtil;
 
 
 public class Test20140523 {
+	
+	@Test
+	public void testQueryItemPrice() throws Exception{
+		QueryItemPriceRequest queryItemPrice = new QueryItemPriceRequest();
+		
+		queryItemPrice.setHost("http://api.weigou.qq.com");
+		queryItemPrice.setUri("/wgwitem/wgQueryItemPrice.xhtml");
+		
+		queryItemPrice.setTimeStamp(SystemUtil.now2TimeStamp());
+		queryItemPrice.setRandomValue(SystemUtil.getRandom());
+		queryItemPrice.setUin(Constants.UIN);
+		queryItemPrice.setAccessToken(Constants.ACCESS_TOKEN);
+		queryItemPrice.setAppOAuthID(Constants.APP_OAUTH_ID);
+		
+		queryItemPrice.setFormat("xml");
+		queryItemPrice.setItemid("itemid");
+		queryItemPrice.setSkuId(19216811);
+		queryItemPrice.setSubUin(Constants.UIN);
+		queryItemPrice.setShopId("shopId");
+		
+		HashMap<String, String> paramMap = queryItemPrice.getParamMap();
+		
+		System.out.println(URLUtil.makeCompleteURL(paramMap,Constants.SECRET_OAUTH_KEY));			
+	}
 	
 	@Test
 	public void testGetItemMultiStock() throws Exception{
